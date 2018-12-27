@@ -1,0 +1,41 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+</div>
+<br/>
+<br/>
+<div class="container">
+  <div>
+    <form #theForm="ngForm">
+      <div class="form-group">
+        <input type="file" (change)="changeListener($event)"/>
+      </div>
+
+      <div class="form-group">
+        <label for="year">Year</label>
+        <input type="number" class="form-control" id="year" required [(ngModel)]="year" name="year" #yar="ngModel">
+        <div [hidden]="yar.valid || yar.touched" class="alert alert-danger">
+          Year is required
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="month">Month</label>
+        <select class="form-control" id="month" required [(ngModel)]="month" name="month">
+          <option *ngFor="let m of monthes" [value]="m.num">{{m.name}}</option>
+        </select>
+      </div>
+
+      <button type="button" class="btn btn-primary" (click)="calculate()" [disabled]="!theForm.valid">Calculate</button>
+      <button type="button" class="btn btn-default" (click)="clear()" style="margin-left: 20px">Clear</button>
+    </form>
+  </div>
+  <hr>
+  <div>
+    <ul>
+      <li *ngFor="let r of reports">{{r}}</li>
+    </ul>
+  </div>
+</div>
